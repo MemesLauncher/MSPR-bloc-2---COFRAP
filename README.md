@@ -35,9 +35,10 @@ kubectl create namespace cofrap-fn<br>
 helm upgrade openfaas openfaas/openfaas --install --namespace cofrap --set functionNamespace=cofrap-fn --set basic_auth=true <br>
 
 <b>Récupération du mot de passe admin du namespace (A noter): </b><br>
-[System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String($(kubectl -n openfaas get secret basic-auth -o jsonpath="{.data.basic-auth-password}"))) /!\ A FAIRE SUR POWERSHELL ADMIN /!\ <br>
+[System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String($(kubectl -n openfaas get secret basic-auth -o jsonpath="{.data.basic-auth-password}")))         <b>/!\ A EXECUTER SUR POWERSHELL ADMIN /!\ </b><br>
 
 <b>Hosting et accès à l'interface OpenFaaS : </b> <br>
 kubectl port-forward -n cofrap svc/gateway 8080:8080  <br>
 localhost:8080  <br>
 
+![image](https://github.com/user-attachments/assets/2139bc47-c47c-4fba-a3e0-eef12ffa2a1c)
