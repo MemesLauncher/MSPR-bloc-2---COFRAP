@@ -12,6 +12,7 @@ Fréquence des réunions : Weekly (lundi soir)
 # Technologies
 Kubernetes<br>
 K8s<br>
+Minikube<br>
 Maria DB<br>
 Python
 
