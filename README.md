@@ -28,6 +28,11 @@ helm repo update
 
 # Commandes d'initialisation du projet openfaas
 
+<b>Installation d'openFaaS : </b>  <br>
+helm repo add openfaas https://openfaas.github.io/faas-netes/  <br>
+helm repo update  <br>
+
+<b>Création des namespaces : </b>  <br>
 kubectl create namespace cofrap  <br>
 kubectl create namespace cofrap-fn<br>
 
@@ -35,7 +40,7 @@ kubectl create namespace cofrap-fn<br>
 helm upgrade openfaas openfaas/openfaas --install --namespace cofrap --set functionNamespace=cofrap-fn --set basic_auth=true <br>
 
 <b>Récupération du mot de passe admin du namespace (A noter): </b><br>
-[System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String($(kubectl -n openfaas get secret basic-auth -o jsonpath="{.data.basic-auth-password}")))         <b>/!\ A EXECUTER SUR POWERSHELL ADMIN /!\ </b><br>
+[System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String($(kubectl -n cofrap get secret basic-auth -o jsonpath="{.data.basic-auth-password}")))         <b>/!\ A EXECUTER SUR POWERSHELL ADMIN /!\ </b><br>
 
 <b>Hosting et accès à l'interface OpenFaaS : </b> <br>
 kubectl port-forward -n cofrap svc/gateway 8080:8080  <br>
