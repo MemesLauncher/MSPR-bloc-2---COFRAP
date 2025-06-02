@@ -2,7 +2,7 @@
 MSPR Bloc 2 - EPSI I2
 
 # Lien rapport final
-https://ifagparis-my.sharepoint.com/:w:/r/personal/francois_goudet_ecoles-epsi_net/Documents/CDC%20Technique.docx?d=wf34460c7be8a4b70b5b413340151f6ab&csf=1&web=1&e=qpSWQt
+https://ifagparis-my.sharepoint.com/:w:/g/personal/anthony_tran1_ecoles-epsi_net/EQpg8Wca9QNNtMIDltgV4d0BrdLtTCOj4ZMgbvR8YYfUaA?e=zNX7XP
 
 # Guideline du projet
 Durée maximum d'un sprint : 3 semaines<br>
