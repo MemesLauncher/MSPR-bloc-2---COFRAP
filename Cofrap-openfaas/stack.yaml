@@ -1,0 +1,32 @@
+version: 1.0
+provider:
+  name: openfaas
+  gateway: http://127.0.0.1:8080
+  
+functions:
+  password-builder:
+    lang: python3-http
+    handler: ./password-builder
+    image: kadah/password-builder
+    labels:
+      com.openfaas.scale.min: "1"
+      com.openfaas.scale.max: "1"
+    
+  mfa-builder:
+    lang: python3-http
+    handler: ./mfa-builder
+    image: kadah/mfa-builder
+    labels:
+      com.openfaas.scale.min: "1"
+      com.openfaas.scale.max: "1"
+  
+  login-handler:
+    lang: python3-http
+    handler: ./login-handler
+    image: kadah/login-handler
+    labels:
+      com.openfaas.scale.min: "1"
+      com.openfaas.scale.max: "1"
+
+  
+
