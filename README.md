@@ -47,3 +47,29 @@ kubectl port-forward -n cofrap svc/gateway 8080:8080  <br>
 localhost:8080  <br>
 
 ![image](https://github.com/user-attachments/assets/2139bc47-c47c-4fba-a3e0-eef12ffa2a1c)
+
+
+# Gestion de la DB
+
+## Connexion a mariaDB
+
+kubectl get pods -n default
+kubectl exec -it <nom-du-pod> -- mariadb -u root -p
+
+mdp = my_secret_pwd
+
+## Creation de la DB
+
+-- Création de la base de données
+CREATE DATABASE IF NOT EXISTS cofrap;
+USE cofrap;
+
+-- Création de la table user
+CREATE TABLE user (
+    ID INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(255) NULL,
+    password VARCHAR(255) NULL,
+    MFA VARCHAR(255) NULL,
+    gendate DATETIME NULL,
+    expired TINYINT DEFAULT 0 NULL
+);
