@@ -50,10 +50,14 @@ localhost:8080  <br>
 
 # Mise en place des fonctions
 
-1- Se déplacer dans le dossier 'cofrap functions' <br>
-2- faire la commande `faas-cli up -f stack.yaml'<br>
+1- Se déplacer dans le dossier 'cofrap-openfaas' <br>
+2- faire la commande `faas-cli up -f stack.yaml`<br>
 
 # Gestion de la DB
+1- Se déplacer dans le dossier 'cofrap-openfaas' <br>
+2- faire la commande `kubectl apply -f mariadb-deployement.yaml`<br>
+
+## Creation du kube mariaDB
 
 ## Connexion a mariaDB
 
@@ -65,8 +69,8 @@ kubectl exec -it <nom-du-pod> -- mariadb -u root -p
 ## Creation de la DB
 
 -- Création de la base de données <br>
-CREATE DATABASE IF NOT EXISTS cofrap;
-USE cofrap;
+CREATE DATABASE IF NOT EXISTS cofrap; <br>
+USE cofrap;<br>
 
 -- Création de la table user <br>
 CREATE TABLE user (
