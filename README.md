@@ -54,10 +54,10 @@ localhost:8080  <br>
 2- faire la commande `faas-cli up -f stack.yaml`<br>
 
 # Gestion de la DB
-1- Se déplacer dans le dossier 'cofrap-openfaas' <br>
-2- faire la commande `kubectl apply -f mariadb-deployement.yaml`<br>
 
 ## Creation du kube mariaDB
+1- Se déplacer dans le dossier 'cofrap-openfaas' <br>
+2- faire la commande `kubectl apply -f mariadb-deployement.yaml`<br>
 
 ## Connexion a mariaDB
 
