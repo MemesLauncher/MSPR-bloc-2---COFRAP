@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Mon compte</title>
+    <style>
+        body { font-family: 'Segoe UI', Arial, sans-serif; background: #f7f7fa; margin: 0; padding: 0; }
+        .container { background: #fff; max-width: 400px; margin: 40px auto 0 auto; padding: 32px 24px 24px 24px; border-radius: 12px; box-shadow: 0 2px 12px rgba(0,0,0,0.08);}
+        h1 { text-align: center; color: #2d3a4a; margin-bottom: 24px;}
+        #username { text-align: center; font-size: 1.2em; color: #1976d2; margin-top: 24px;}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Bienvenue sur votre compte</h1>
+        <div id="username"></div>
+    </div>
+    <script>
+        // Récupère le nom d'utilisateur depuis l'URL
+        const params = new URLSearchParams(window.location.search);
+        const username = params.get('username');
+        document.getElementById('username').innerText = username ? "Utilisateur : " + username : "";
+    </script>
+</body>
+</html>

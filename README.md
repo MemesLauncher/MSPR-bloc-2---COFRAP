@@ -73,7 +73,7 @@ CREATE DATABASE IF NOT EXISTS cofrap; <br>
 USE cofrap;<br>
 
 -- Création de la table user <br>
-CREATE TABLE user (
+CREATE TABLE users (
     ID INT AUTO_INCREMENT PRIMARY KEY,
     username VARCHAR(255) NULL,
     password VARCHAR(255) NULL,

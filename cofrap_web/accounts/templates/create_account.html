@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Créer un compte</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: #f7f7fa;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            background: #fff;
+            max-width: 400px;
+            margin: 40px auto 0 auto;
+            padding: 32px 24px 24px 24px;
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+        }
+        h1 {
+            text-align: center;
+            color: #2d3a4a;
+            margin-bottom: 24px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #444;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 8px 10px;
+            margin-bottom: 18px;
+            border: 1px solid #cfd8dc;
+            border-radius: 5px;
+            font-size: 1em;
+        }
+        button {
+            width: 100%;
+            background: #1976d2;
+            color: #fff;
+            border: none;
+            padding: 10px 0;
+            border-radius: 5px;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        button:hover {
+            background: #125ea7;
+        }
+        #result {
+            margin-top: 18px;
+            color: #1976d2;
+            text-align: center;
+            font-weight: bold;
+            min-height: 24px;
+        }
+        .qr-section {
+            margin-top: 24px;
+            text-align: center;
+        }
+        .qr-label {
+            font-weight: bold;
+            color: #1976d2;
+            margin-bottom: 8px;
+            display: block;
+        }
+        .qr-img {
+            display: none;
+            margin: 0 auto 18px auto;
+            max-width: 220px;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Créer un compte</h1>
+        <form id="createForm">
+            <label for="username">Nom d'utilisateur :</label>
+            <input type="text" id="username" name="username" required>
+            <button type="submit">Créer</button>
+        </form>
+        <div id="result"></div>
+        <div class="qr-section" id="pwd-section" style="display:none;">
+            <span class="qr-label">QR Code Mot de passe :</span>
+            <img id="qrimg" class="qr-img"/>
+        </div>
+        <div class="qr-section" id="mfa-section" style="display:none;">
+            <span class="qr-label">QR Code MFA :</span>
+            <img id="mfaimg" class="qr-img"/>
+        </div>
+    </div>
+    <script>
+        document.getElementById('createForm').onsubmit = async function(e) {
+            e.preventDefault();
+            const username = document.getElementById('username').value;
+            const response = await fetch('/accounts/create/', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({username})
+            });
+            const data = await response.json();
+
+            // Affiche le message (si présent)
+            if (data.message) {
+                document.getElementById('result').innerText = data.message;
+            } else {
+                document.getElementById('result').innerText = JSON.stringify(data);
+            }
+
+            // Affiche le QR code du mot de passe si présent
+            if (data.qrcode) {
+                document.getElementById('qrimg').src = "data:image/png;base64," + data.qrcode;
+                document.getElementById('pwd-section').style.display = "block";
+                document.getElementById('qrimg').style.display = "block";
+            } else {
+                document.getElementById('pwd-section').style.display = "none";
+                document.getElementById('qrimg').style.display = "none";
+            }
+
+            // Affiche le QR code MFA si présent
+            if (data.mfa_qrcode) {
+                document.getElementById('mfaimg').src = "data:image/png;base64," + data.mfa_qrcode;
+                document.getElementById('mfa-section').style.display = "block";
+                document.getElementById('mfaimg').style.display = "block";
+            } else {
+                document.getElementById('mfa-section').style.display = "none";
+                document.getElementById('mfaimg').style.display = "none";
+            }
+        }
+    </script>
+</body>
+</html>
