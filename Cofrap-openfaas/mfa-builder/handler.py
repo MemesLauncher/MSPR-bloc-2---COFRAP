@@ -4,13 +4,16 @@ import string
 import qrcode
 import bcrypt
 import pymysql
+import json
 
 def handle(event, context):
     try:
-        username = event.body  # On suppose que le username est passé dans le body
+        data = json.loads(event.body)
+        username = data.get("username")  # On suppose que le username est passé dans le body
         salt = b"$2b$12$wJ6vQwQwQwQwQwQwQwQwQ."
-        MFA = ''.join(random.choices(
-            string.ascii_uppercase + string.digits + string.ascii_lowercase + string.punctuation, k=25))
+        caracteres = string.ascii_letters + string.digits + string.punctuation
+        caracteres = caracteres.replace('\\', '')
+        MFA = ''.join(random.choices(caracteres, k=25))
         hashMFA = bcrypt.hashpw(MFA.encode(), salt)
 
         # Génération du QR code (optionnel)
@@ -42,7 +45,7 @@ def handle(event, context):
 
         return {
             "statusCode": 200,
-            "body": f"MFA généré et stocké pour {username}"
+            "body": f"MFA généré et stocké pour {username} -> {MFA}"
         }
     except Exception as e:
         return {

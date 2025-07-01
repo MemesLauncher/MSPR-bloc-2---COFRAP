@@ -5,14 +5,17 @@ import qrcode
 import bcrypt
 import pymysql
 from datetime import date
+import json
 
 def handle(event, context):
     conn = pymysql.connect(
-    host="mariadb.default.svc.cluster.local",
-    user="root",
-    password="my_secret_pwd",
-    database="cofrapdb"
+        host="mariadb.default.svc.cluster.local",
+        user="root",
+        password="my_secret_pwd",
+        database="cofrapdb"
     )
+    data = json.loads(event.body)
+    username = data.get("username")
     try:
         base_dir = os.path.dirname(__file__)
         output_path = os.path.join(base_dir, "images/qrcode.png")
@@ -22,7 +25,6 @@ def handle(event, context):
         hashPWD = bcrypt.hashpw(pwd.encode(), salt)
         qrcodeImg = qrcode.make(pwd)
         qrcodeImg.save(output_path)
-        username = 'test'
 
         gendate = date.today().strftime("%Y-%m-%d")
         # StoreInBDD
@@ -33,10 +35,12 @@ def handle(event, context):
 
         return {
                 "statusCode": 200,
-                "body": f"done"
+                "body": f"done -> {pwd}"
             }
     
     except Exception as e:
+        import traceback
+        print(traceback.format_exc())  # Affiche la stacktrace dans les logs du pod
         return {
             "statusCode": 500,
             "body": f"Erreur durant le traitement : {str(e)}"
