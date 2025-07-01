@@ -81,3 +81,9 @@ CREATE TABLE users (
     gendate DATETIME NULL,
     expired TINYINT DEFAULT 0 NULL
 );
+
+# Gestion du front
+
+`pip install -r requirements.txt`
+`cd cofrap_web`
+`py manage.py runserver`
