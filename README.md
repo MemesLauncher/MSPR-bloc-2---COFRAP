@@ -69,7 +69,7 @@ localhost:8080  <br>
 ## Creation de la DB
 
 -- Création de la base de données <br>
-`CREATE DATABASE IF NOT EXISTS cofrap;` <br>
+`CREATE DATABASE IF NOT EXISTS cofrapdb;` <br>
 `USE cofrap;`<br>
 
 -- Création de la table user <br>
