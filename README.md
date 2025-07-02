@@ -84,6 +84,6 @@ CREATE TABLE users (
 
 # Gestion du front
 
-`pip install -r requirements.txt`
-`cd cofrap_web`
-`py manage.py runserver`
+`pip install -r requirements.txt` <br>
+`cd cofrap_web`<br>
+`py manage.py runserver`<br>
