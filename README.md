@@ -61,29 +61,29 @@ localhost:8080  <br>
 
 ## Connexion a mariaDB
 
-kubectl get pods -n default
-kubectl exec -it <nom-du-pod> -- mariadb -u root -p
+`kubectl get pods -n default` <br>
+`kubectl exec -it <nom-du-pod> -- mariadb -u root -p`
 
 <b>mdp = my_secret_pwd</b>
 
 ## Creation de la DB
 
 -- Création de la base de données <br>
-CREATE DATABASE IF NOT EXISTS cofrap; <br>
-USE cofrap;<br>
+`CREATE DATABASE IF NOT EXISTS cofrapdb;` <br>
+`USE cofrap;`<br>
 
 -- Création de la table user <br>
-CREATE TABLE users (
+`CREATE TABLE users (
     ID INT AUTO_INCREMENT PRIMARY KEY,
     username VARCHAR(255) NULL,
     password VARCHAR(255) NULL,
     MFA VARCHAR(255) NULL,
     gendate DATETIME NULL,
     expired TINYINT DEFAULT 0 NULL
-);
+);`
 
 # Gestion du front
 
-`pip install -r requirements.txt`
-`cd cofrap_web`
-`py manage.py runserver`
+`pip install -r requirements.txt` <br>
+`cd cofrap_web`<br>
+`py manage.py runserver`<br>
